@@ -1,13 +1,15 @@
 Reabilitation for people with injuries.
 
-## You can run this application using docker:
+## How to start
+
+### You can run this application using docker:
 1. Run application with Django server
     ```docker-compose up -d```
 2. Create django superuser  
     1. ```docker exec -it rehab_app python manage.py createsuperuser```
     2. Follow instructions
 
-## You can run this application using db inside docker
+### You can run this application using db inside docker
 1. Run container with DB  
     ```docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 postgres:12```
 2. Pull this repo
