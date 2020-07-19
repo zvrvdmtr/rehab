@@ -8,8 +8,11 @@ class Practice(models.Model):
     descrioption = models.TextField(max_length=256,
                                     verbose_name='Practice description')
     reps = models.PositiveIntegerField(verbose_name='Reps number')
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.OneToOneField(Event, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Practice'
         verbose_name_plural = 'Practices'
+
+    def __str__(self):
+        return self.title
