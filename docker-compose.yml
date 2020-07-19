@@ -1,15 +1,6 @@
 version: "3.7"
 
 services:
-    db:
-        image: postgres:12
-        container_name: rehab_pg
-        environment:
-            - POSTGRES_DB=postgres
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-        ports:
-            - 5432
         
     app:
         container_name: rehab_app
@@ -19,5 +10,3 @@ services:
         command: make docker-run-app
         ports:
             - 8000:8000
-        depends_on:
-            - db

@@ -1,13 +1,23 @@
 Reabilitation for people with injuries.
 
 ## You can run this application using docker:
+1. Run application with Django server (dy default using sqlite3)
+    ```docker-compose up -d```
+2. Create django superuser  
+    1. ```docker exec -it rehab_app python manage.py createsuperuser```
+    2. Follow instructions
+
+## You can run this application using db inside docker
 1. Run container with DB  
     ```docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 postgres:12```
-2. Run application with Django server  
-    ```docker-compose up -d```
-3. Create django superuser  
-    1. ```docker exec -it 9452be272545 python manage.py createsuperuser```
+2. Pull this repo
+3. Run migrations  
+    ```python manage.py migrate```
+4. Create django superuser  
+    1. ```python manage.py createsuperuser```
     2. Follow instructions
+5. Run app  
+    ```python manage.py runserver```
 
 After created superuser you will be able to create db models using django admin.
 
