@@ -1,7 +1,7 @@
 Reabilitation for people with injuries.
 
 ## You can run this application using docker:
-1. Run application with Django server (dy default using sqlite3)
+1. Run application with Django server
     ```docker-compose up -d```
 2. Create django superuser  
     1. ```docker exec -it rehab_app python manage.py createsuperuser```
