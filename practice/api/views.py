@@ -13,7 +13,7 @@ class PracticesList(ListCreateAPIView):
         if 'from' in self.request.query_params:
             practices.filter(start_date__gte=self.request.query_params['from'])
         if 'to' in self.request.query_params:
-            practices.filter(start_date__lte=self.request.query_params['to'])
+            practices.filter(end_date__lte=self.request.query_params['to'])
         return practices
 
 
