@@ -1,9 +1,5 @@
 from practice.api.serializer import PracticeSerializer
 from practice.models import Practice
-# from rest_framework.generics import get_object_or_404
-# from rest_framework import status
-# from rest_framework.response import Response
-# from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 
@@ -15,19 +11,13 @@ class PracticesList(ListCreateAPIView):
     def get_queryset(self):
         practices = Practice.objects.all()
         if 'from' in self.request.query_params:
-            practices.filter(start_date=self.request.query_params['from'])
+            practices.filter(start_date__gte=self.request.query_params['from'])
         if 'to' in self.request.query_params:
-            practices.filter(start_date=self.request.query_params['to'])
+            practices.filter(start_date__lte=self.request.query_params['to'])
         return practices
 
 
 class PracticeView(RetrieveUpdateDestroyAPIView):
 
-    def get(self, request, pk):
-        pass
-
-    def update(self, request, pk):
-        pass
-
-    def delete(self, request, pk):
-        pass
+    serializer_class = PracticeSerializer
+    queryset = Practice.objects.all()
