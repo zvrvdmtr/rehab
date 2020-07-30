@@ -1,41 +1,23 @@
 from event.api.serializer import EventSerializer
-from rest_framework.generics import get_object_or_404
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from event.models import Event
 
 
-class EventsList(APIView):
+class EventsList(ListCreateAPIView):
 
-    def get(self, request):
-        events = Event.objects.all()
-        serializer = EventSerializer(events, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 
-    def post(self, request):
-        serializer = EventSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            event_saved = serializer.save()
-            return Response({'New event created': event_saved.day}, status=status.HTTP_201_CREATED)
+    def get_queryset(self):
+        practices = Event.objects.all()
+        if 'from' in self.request.query_params:
+            practices.filter(event_date__gte=self.request.query_params['from'])
+        if 'to' in self.request.query_params:
+            practices.filter(event_date__lte=self.request.query_params['to'])
+        return practices
 
 
-class EventView(APIView):
+class EventView(RetrieveUpdateDestroyAPIView):
 
-    def get(self, request, pk):
-        event = get_object_or_404(Event.objects.all(), id=pk)
-        serializer = EventSerializer(event)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def put(self, request, pk):
-        event = get_object_or_404(Event.objects.all(), id=pk)
-        data = request.data
-        serializer = EventSerializer(instance=event, data=data)
-        if serializer.is_valid(raise_exception=True):
-            saved_event = serializer.save()
-            return Response({'Event updated': saved_event.day}, status=status.HTTP_204_NO_CONTENT)
-
-    def delete(self, request, pk):
-        event = get_object_or_404(Event.objects.all(), id=pk)
-        event.delete()
-        return Response({'Event deleted'}, status=status.HTTP_204_NO_CONTENT)
+    queryset = Event.objects.all()
+    serialiser = EventSerializer
