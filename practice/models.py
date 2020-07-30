@@ -8,7 +8,7 @@ class Practice(models.Model):
     injury_type = models.CharField(max_length=128, verbose_name='Injury type')
     reps = models.PositiveIntegerField(verbose_name='Reps number')
     loops = models.PositiveIntegerField(verbose_name='Loops number')
-    descrioption = models.TextField(max_length=256,
+    description = models.TextField(max_length=256,
                                     verbose_name='Practice description')
     start_time = models.TimeField(verbose_name='Время начала')
     start_date = models.DateField(verbose_name='Дата начала')
