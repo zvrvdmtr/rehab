@@ -1,9 +1,12 @@
 from event.api.serializer import EventSerializer
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from event.models import Event
+from rest_framework.permissions import IsAuthenticated
 
 
 class EventsList(ListCreateAPIView):
+
+    permission_classes = [IsAuthenticated]
 
     queryset = Event.objects.all()
     serializer_class = EventSerializer
@@ -18,6 +21,8 @@ class EventsList(ListCreateAPIView):
 
 
 class EventView(RetrieveUpdateDestroyAPIView):
+
+    permission_classes = [IsAuthenticated]
 
     queryset = Event.objects.all()
     serialiser = EventSerializer
