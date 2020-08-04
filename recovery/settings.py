@@ -92,7 +92,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': 5432,
         'NAME': 'postgres',
         'USER': 'postgres',
@@ -147,8 +147,8 @@ DJOSER = {
     'LOGIN_FIELD': 'email',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'HIDE_USERS': True,
-    'SEND_ACTIVATION_EMAIL': True,
-    'SEND_CONFIRMATION_EMAIL': True,
+    # 'SEND_ACTIVATION_EMAIL': True,
+    # 'SEND_CONFIRMATION_EMAIL': True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
     'PASSWORD_RESET_CONFIRM_URL': 'api/v1/users/activation/{uid}/{token}',
@@ -156,6 +156,7 @@ DJOSER = {
     'ACTIVATION_URL': 'api/v1/users/activation/{uid}/{token}',
     'SERIALIZERS': {
         'user_create': 'user.api.serializer.CustomUserCreateSerializer',
+        'user_create_password_retype': 'user.api.serializer.CustomUserCreateSerializer',
         'user': 'user.api.serializer.CustomUserSerializer'
     },
 }
